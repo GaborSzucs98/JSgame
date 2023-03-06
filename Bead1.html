@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="Bead1.js"></script>
+    <style>
+        body {
+        background-image: url('jskep.png');
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+        }
+    </style>
+</head>
+<body>
+    <style>
+        #Menu{
+            margin: auto;
+            width: 30%;
+            border: 3px solid black;
+            background-color: lightgreen;
+            text-align: center;
+            padding: 10px;
+        }
+    </style>
+    <div id="Menu">
+    <style>
+        #leiras {
+            background-color: white;
+            border: 1px solid black;
+        }
+      </style>
+    <div>
+        <div id="leiras" class="hide" hidden style="text-align: left; padding: 10px;">
+            <p>
+                <h2>Játék Leirása</h2>
+                <ul>
+                    <li>A királynak négyzet alapú szobái vannak, amelyek fekete és fehér cellákból állnak.</li>
+                    <li>A fehér cellákba villanykörtéket lehet elhelyezni.</li>
+                    <li>A villanykörtékből a fény átlósan nem terjed, csak az adott sor és oszlop mentén.</li>
+                    <li>A fekete cellákon valamilyen tereptárgy van, ami akadályozza a fény terjedését.</li>
+                    <li>A fekete cellák opcionálisan egy egész számot is tartalmazhatnak 0-tól 4-ig. Ez azt jelzi, hogy hány szomszédos (alul, felül, jobbra, balra) cella tartalmaz villanykörtét. Ha van ilyen szám, akkor be kell tartani!</li>
+                    <li>Két villanykörte soha nem világíthatja meg egymást!</li>
+                    <li>A játék célja a villanykörtéket úgy elhelyezni, hogy minden fehér cellát megvilágítsanak.</li>
+                    <li>A játékot egy játékos játssza, amíg meg nem oldja a rejtvényt, tehát több játékos egyidejű kezeléséről vagy körökre osztásról nem kell gondoskodni.</li>
+                </ul>
+            </p>
+        </div>
+        <input type="button" id="leirasgomb" value="Leírás megjelenítése" style="padding: 5px; margin: 5px;">
+    </div>
+    <div>
+        <input type="button" id="newname" value="Új név" style="padding: 5px; margin: 5px;">
+        <div id="namechange" class="hide" hidden>
+            <input type="text" id="name" style="padding: 5px; margin: 5px;">
+            <input type="button" id="namebutton" value="Név Kiválasztása" style="padding: 5px; margin: 5px;">
+        </div>
+    </div>
+    <div>
+        <input type="button" id="palyagomb" value="Pálya kiválastása" style="padding: 5px; margin: 5px;">
+        <div id="maps" class="hide" hidden style="padding: 5px; margin: 5px;">
+            <input type="button" value="Könnyű" id="map1" style="padding: 5px; margin: 5px;">
+            <input type="button" value="Haladó" id="map2" style="padding: 5px; margin: 5px;">
+            <input type="button" value="Extrém" id="map3" style="padding: 5px; margin: 5px;">
+            <input type="button" value="Mentés folytatása" id="map4" hidden>
+        </div>
+    </div>
+    <style>
+        #table{
+            text-align: center;
+            margin: auto;
+        }
+        table, th, td {
+            width: auto;
+            border: 2px solid;
+            padding: 10px;
+        }
+    </style>
+    <div>
+        <input type="button" id="results" value="Eredmények" style="padding: 5px; margin: 5px;">
+        <div id="resultsboard" class="hide" hidden>
+            <table id="table">
+                <tr>
+                    <th>Játékos</th>
+                    <th>Pálya</th>
+                    <th>Eredmény</th>
+                    <th>Idő</th>
+                    <th>Dátum</th>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <style>
+        #game{
+            margin: auto;
+            border: 3px solid black;
+            background-color: lightgreen;
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
+    </div>
+    <div id="game" hidden style="padding: 5px; margin: 5px;">
+        <style>
+            .tooltip {
+            position: relative;
+            display: inline-block;
+            }
+
+            .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 120px;
+            background-color: burlywood;
+            color: #fff;
+            text-align: center;
+            padding: 5px 0;
+            border-radius: 6px;
+
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -60px;
+
+            opacity: 0;
+            transition: opacity 0.3s;
+            }
+
+            .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+            }
+        </style>
+
+        <input type="button" id="check" value="Megoldás ellenőrzése" style="padding: 5px; margin: 5px;">
+        <div class="tooltip">
+            <input type="button" id="save" value="Mentés" style="padding: 5px; margin: 5px;">
+            <span class="tooltiptext">Egyszerre csak egy mentés van</span>
+        </div>
+        <style>
+            .megold{
+                color: gold;
+                font-size: larger;
+                background-color: red;
+                border: 1px #000000;
+                padding: 5px;
+                margin: auto;
+                width: 200px;
+                text-align: center;
+            }
+        </style>
+        <div id="player" style="font-size: large;">
+        </div>
+        <div id="time" style="font-size: large;">
+        </div>
+        <div id="helyes" hidden class="megold">
+            HELYES MEGOLDÁS!
+        </div>
+        <div id="helytelen" hidden class="megold">
+            HELYTELEN MEGOLDÁS!
+        </div>
+
+        <div>
+            <canvas id="canvas7" width="700px" height="700px" style="border:3px solid #000000; margin: 5px;" hidden></canvas>
+            <canvas id="canvas10" width="1000px" height="1000px" style="border:3px solid #000000; margin: 5px;" hidden></canvas>
+        </div>
+
+    </div>
+</body>
+</html>
